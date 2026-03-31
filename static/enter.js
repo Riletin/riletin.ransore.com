@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
             setNowPlaying();
 
             let vol = 0;
-            const maxVol = 0.04;
+            const maxVol = 0.03;
             const fadeStep = 0.01;
             
             const fade = setInterval(() => {
