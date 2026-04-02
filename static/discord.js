@@ -7,37 +7,60 @@ async function fetchLanyard() {
         console.log("Lanyard Data:", data);
 
         const statusEmojiEl = document.getElementById('status-emoji');
-        const emojis = { online: "🟢", idle: "🌙", dnd: "🔴", offline: "⚫" };
-        statusEmojiEl.innerText = emojis[data.discord_status] || "⚫";
+        const emojis = {
+            online: "🟢 Online",
+            idle: "🌙 Idle/AFK",
+            dnd: "🔴",
+            offline: "⚫ Offline"
+        };
+        statusEmojiEl.innerText = emojis[data.discord_status] || "";
 
         const list = document.getElementById('activities-list');
         list.innerHTML = "";
 
         let hasActivity = false;
 
-        if (data.listening_to_spotify) {
-            hasActivity = true;
-            const li = document.createElement('li');
-            li.innerText = `Listening to ${data.spotify.song}`;
-            list.appendChild(li);
-        }
-
         if (data.activities && data.activities.length > 0) {
             data.activities.forEach(act => {
-                if (act.type === 2) return;
-                
-                hasActivity = true;
-                const li = document.createElement('li');
-                
-                if (act.type === 4) {
-                    const emoji = act.emoji ? act.emoji.name : "";
-                    const state = act.state || "";
-                    li.innerText = `${emoji} ${state}`;
-                } else {
-                    // Games/Apps
-                    li.innerText = `Playing: ${act.name}`;
+                let prefix = "";
+
+                switch (act.type) {
+                    case 0: prefix = "Playing"; break;
+                    case 1: prefix = "Streaming"; break;
+                    case 2: prefix = "Listening to"; break;
+                    case 3: prefix = "Watching"; break;
+                    case 5: prefix = "Competing in"; break;
+
+                    case 4:
+                        const li = document.createElement('li');
+                        li.innerText = `— ${act.emoji} `;
+                        list.appendChild(li);
+                        hasActivity = true;
+                        return;
                 }
-                list.appendChild(li);
+
+                 if (prefix) {
+					const li = document.createElement('li');
+					li.classList.add("activity");
+
+					const title = document.createElement('div');
+					title.classList.add("activity-title");
+					title.innerText = `${prefix} ${act.name}`;
+
+					const details = document.createElement('div');
+					details.classList.add("activity-details");
+
+					const detailText = act.details || "";
+					const stateText = act.state || "";
+
+					details.innerText = `${detailText} • ${stateText}`;
+
+					li.appendChild(title);
+					li.appendChild(details);
+
+					list.appendChild(li);
+					hasActivity = true;
+    			}
             });
         }
 
