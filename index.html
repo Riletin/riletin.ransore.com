@@ -18,7 +18,10 @@ html,body {
 		0px 0px 6px #000;
 	font-family: Comic Sans MS;
 	color: white;
-	overflow-y: auto;
+	overflow: hidden;
+}
+html{
+	background-color: black;
 }
 #enterOverlay {
   position: fixed;
@@ -26,8 +29,7 @@ html,body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: black;
-  color: white;
+  background: transparent;
 
   display: flex;
   justify-content: center;
@@ -237,12 +239,14 @@ html,body {
 	object-fit: cover;
 	z-index: -1;
 	filter: blur(4px);
+	pointer-events: none;
 }
 .banner {
 	position: relative;
 	display: flex;
 	height: 320px;
 	padding-bottom: 16px;
+	pointer-events: none;
 }
 
 /* YOUTUBE MUSIC PLAYER CUSTOM EMBED */
@@ -307,7 +311,7 @@ html,body {
 </head>
 <body>
 <div id="enterOverlay">
-  <h1>Interact</h1>
+  <h1></h1>
 </div>
 <script src="static\discord.js"></script>
 <div class="main-wrapper">
