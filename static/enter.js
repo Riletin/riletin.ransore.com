@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (vol >= maxVol) {
                     clearInterval(fade);
                 }
-            }, 200);
+            }, 1000);
         }).catch((err) => {
             console.error("Playback failed:", err);
         });
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setTimeout(() => {
             overlay.style.display = "none";
-        }, 1500);
+        }, 1);
     });
 
     audio.addEventListener("timeupdate", () => {
