@@ -1,1 +1,1 @@
-[![Preview](https://riletin.ransore.com/preview.png)](https://riletin.ransore.com)
+[![Preview](https://riletin.ransore.com/static/preview.png)](https://riletin.ransore.com)
