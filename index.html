@@ -1,6 +1,7 @@
 <html>
 <head>
 <link rel="icon" href="static/ico.png">
+<meta charset="utf-8">
 <title>@Riletin</title>
 <style>
 html,body {
@@ -8,7 +9,6 @@ html,body {
 	padding: 0;
 	border: 0;
 	font: inherit;
-	overflow: hidden;
 	vertical-align: baseline;
 	list-style-type: none;
 	list-style: none;
@@ -18,7 +18,6 @@ html,body {
 		0px 0px 6px #000;
 	font-family: Comic Sans MS;
 	color: white;
-	overflow: hidden;
 }
 html{
 	background-color: black;
@@ -99,34 +98,87 @@ html{
 #home {
     display: flex;
 }
-#info-wrapper {
-	flex-direction: column;
-	font-size: 16px;
-	width: 100px;
-	text-align: center;
+
+#discord-profile {
+    display: flex;
+    flex-direction: column;
+	border-top: 2px solid red;
 	border-right: 2px solid red;
 }
 
-#discord-wrapper {
-	font-size: 16px;
-	border-top: 2px solid red;
-	width: 100%;
-	height: 100%;
-	text-align: left;
+#discord-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+	border-bottom: 2px solid red;
+	padding: 6px;
 }
+
+.avatar-wrapper {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+}
+
+#discord-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: block;
+}
+
+#status {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 12px;
+}
+
+.identity-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.name-line {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+#discord-tag {
+    font-size: 12px;
+    border-radius: 20%;
+    background: rgba(85, 85, 85, 0.5);
+    padding: 2px 5px;
+    text-shadow: none;
+}
+
+#about-me {
+    font-size: 14px;
+    line-height: 1.5;
+	padding: 2px;
+}
+
 #activities-list {
     font-size: 16px;
+	text-align: left;
+	width: 100%;
+	border-top: 2px solid red;
 }
-#status-emoji {
-	padding-right: 4px;
-	border-bottom: 2px solid red;
-	border-right: 2px solid red;
-}
+
 .activity {
 	padding: 2px 4px;
 	border-bottom: 2px dashed rgba(255,0,0,0.5);
 }
 
+.activity-details {
+	font-size: 12px;
+	color: #888;
+	white-space: nowrap;
+}
 /*          HOME          */
 
 /*         SOCIALS        */
@@ -231,14 +283,15 @@ html{
 /*         PROFILES        */
 
 #bg {
-	position: absolute;
-	top: -2%;
-	left: -2%;
-	width: 104%;
-	height: 104%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 	object-fit: cover;
 	z-index: -1;
 	filter: blur(4px);
+	overflow: hidden;
 	pointer-events: none;
 }
 .banner {
@@ -327,20 +380,32 @@ html{
             </nav>
         </div>
         <div class="content-area">
-
-
-
             <div id="home" class="tab-content">
-				<div id="info-wrapper">
-					<p style="font-size: 24px; border-bottom: solid 2px #f00;">Riletin</p>
-					<p>AuDHD</p>
-					<p>19</p>
+				<div id="discord-profile">
+					<div id="discord-header">
+						<div class="avatar-wrapper">
+							<img id="discord-avatar" src="">
+							<span id="status"></span>
+						</div>
+						<div class="identity-info">
+							<div class="name-line">
+								<strong id="discord-name"></strong>
+								<span id="discord-tag">!₹$</span>
+							</div>
+							<div id="platform-icon"></div>
+						</div>
+					</div>
+					<div id="about-me">
+						<div>AuDHD | Male | 19</div>
+						<div>♡</div>
+						<div>SlashCo Addiction</div>
+						<div>♡  https://s.team/ </div>
+						<div> </div>
+						<div>https://ransore.com/vrchat</div>
+					</div>
 				</div>
-                <div id="discord-wrapper">
-                    <span id="status-emoji"></span>
-                    <span id="activities-list"></span>
-                </div>
-            </div>
+				<div id="activities-list"></div>
+			</div>
 
             <div id="socials" class="tab-content" style="display:none;">
 				<a href="https://twitch.tv/riletin" class="social-box">
