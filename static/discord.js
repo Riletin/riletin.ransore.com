@@ -11,7 +11,6 @@ async function fetchPresence() {
 function updateUI(data) {
     const statusEmojis = { online: "🟢", idle: "🌙", dnd: "🔴", offline: "⚫" };
 
-    document.getElementById('discord-avatar').src = data.data.discord_user.avatar;
     document.getElementById('discord-name').innerText = data.data.discord_user.global_name;
     document.getElementById('status').innerHTML = `${statusEmojis[data.data.status] || "⚫"}`;
 
