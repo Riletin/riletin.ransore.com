@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const audio = document.getElementById("bgAudio");
     const progressFill = document.querySelector(".ytm-player__progress-fill");
 	const progress = document.querySelector(".ytm-player__progress");
+	const volumeSlider = document.getElementById("volumeSlider");
 
 	if (progress) {
 		progress.addEventListener("click", (e) => {
@@ -10,8 +11,14 @@ document.addEventListener("DOMContentLoaded", () => {
 				const containerWidth = progress.offsetWidth;
 				const clickX = e.offsetX;
 				const clickPercent = clickX / containerWidth;
-				audio.currentTime - clickPercent * audio.duration;
+				audio.currentTime = clickPercent * audio.duration; 
 			}
+		});
+	}
+
+	if (volumeSlider) {
+		volumeSlider.addEventListener("input", (e) => {
+			audio.volume = e.target.value;
 		});
 	}
 
@@ -20,28 +27,15 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    const track = {
-        title: "My Mother Wants Me Dead",
-        artist: "ily",
-        thumb: "static/cover.jpg"
-    };
-
-    function setNowPlaying() {
-        if (document.getElementById("ytm-player__title")) document.getElementById("ytmTitle").innerText = track.title;
-        if (document.getElementById("ytm-player__artist")) document.getElementById("ytmArtist").innerText = track.artist;
-        if (document.getElementById("ytm-player__thumb")) document.getElementById("ytmThumb").src = track.thumb;
-    }
-
     overlay.addEventListener("click", () => {
         audio.currentTime = 0; 
         
         audio.play().then(() => {
             audio.volume = 0;
-            setNowPlaying();
 
             let vol = 0;
             const maxVol = 0.03;
-            const fadeStep = 0.01;
+            const fadeStep = 0.001;
             
             const fade = setInterval(() => {
                 vol += fadeStep;
@@ -50,17 +44,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (vol >= maxVol) {
                     clearInterval(fade);
                 }
-            }, 1000);
+            }, 100);
         }).catch((err) => {
             console.error("Playback failed:", err);
         });
 
-        overlay.style.transition = "opacity 1.5s";
+        overlay.style.transition = "opacity 0.4s";
         overlay.style.opacity = "0";
 
         setTimeout(() => {
             overlay.style.display = "none";
-        }, 1);
+        }, 555);
     });
 
     audio.addEventListener("timeupdate", () => {

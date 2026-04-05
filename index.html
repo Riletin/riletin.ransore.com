@@ -23,21 +23,19 @@ html{
 	background-color: black;
 }
 #enterOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: transparent;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  z-index: 9999;
-  cursor: pointer;
-
-  transition: opacity 0.1s ease;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.5);
+	font-size: 512;
+	color: red;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 9999;
+	cursor: pointer;
 }
 .main-wrapper {
     display: flex;
@@ -113,6 +111,7 @@ html{
     gap: 8px;
 	border-bottom: 2px solid red;
 	padding: 6px;
+	pointer-event: none;
 }
 
 .avatar-wrapper {
@@ -140,12 +139,15 @@ html{
     display: flex;
     flex-direction: column;
     justify-content: center;
+	white-space: nowrap;
+	pointer-event: none;
 }
 
 .name-line {
     display: flex;
     align-items: center;
     gap: 4px;
+	white-space: nowrap;
 }
 
 #discord-tag {
@@ -154,6 +156,7 @@ html{
     background: rgba(85, 85, 85, 0.5);
     padding: 2px 5px;
     text-shadow: none;
+	white-space: nowrap;
 }
 
 #about-me {
@@ -170,14 +173,17 @@ html{
 }
 
 .activity {
-	padding: 2px 4px;
+	padding: 0 6px;
 	border-bottom: 2px dashed rgba(255,0,0,0.5);
+	border-top: 2px dashed rgba(255,0,0,0.5);
+	margin: -2px;
 }
 
 .activity-details {
 	font-size: 12px;
 	color: #888;
 	white-space: nowrap;
+	padding-bottom: 4px;
 }
 /*          HOME          */
 
@@ -292,12 +298,10 @@ html{
 	z-index: -1;
 	filter: blur(4px);
 	overflow: hidden;
-	pointer-events: none;
 }
 .banner {
 	display: flex;
 	padding-bottom: 16px;
-	pointer-events: none;
 }
 
 /* YOUTUBE MUSIC PLAYER CUSTOM EMBED */
@@ -358,12 +362,37 @@ html{
 	background: #ff0000;
 	pointer-event: none;
 }
+
+.ytm-player__volume-wrapper {
+    display: flex;
+	align-items: center;
+    justify-content: center;
+    width: 10px;
+	height: 50px;
+	margin: 0;
+	padding: 0;
+	bottom: 0;
+}
+
+.vertical-slider {
+    width: 64px; /* This becomes the 'height' once rotated */
+    height: 4px;
+    background: #0000;
+    transform: rotate(-90deg);
+    cursor: pointer;
+    accent-color: red;
+}
+
+.vertical-slider::-webkit-slider-thumb {
+    height: 6px;
+    width: 6px;
+    background: red;
+    border-radius: 50%;
+}
 </style>
 </head>
 <body>
-<div id="enterOverlay">
-  <h1></h1>
-</div>
+<div id="enterOverlay">♡</div>
 <script src="static\discord.js"></script>
 <div class="main-wrapper">
 	<div class="banner">
@@ -397,11 +426,8 @@ html{
 					</div>
 					<div id="about-me">
 						<div>AuDHD | Male | 19</div>
-						<div>♡</div>
+						<div>♡ https://s.team/</div>
 						<div>SlashCo Addiction</div>
-						<div>♡  https://s.team/ </div>
-						<div> </div>
-						<div>https://ransore.com/vrchat</div>
 					</div>
 				</div>
 				<div id="activities-list"></div>
@@ -507,6 +533,9 @@ html{
 				<div class="ytm-player__progress" style="cursor: pointer;">
 					<div class="ytm-player__progress-fill"></div>
 				</div>
+			</div>
+			<div class="ytm-player__volume-wrapper">
+				<input type="range" id="volumeSlider" min="0.01" max="0.25" step="0.01" class="vertical-slider">
 			</div>
 		</div>
     </div>
