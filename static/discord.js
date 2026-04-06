@@ -60,7 +60,7 @@ function updateUI(data) {
 		infoLine.className = "activity-details";
         // Only add the dot if BOTH details and state exist
         if (act.details && act.state) {
-            infoLine.innerText = `${act.details} • ${act.state}`;
+            infoLine.innerText = `${act.details}\n${act.state}`;
         } else {
             infoLine.innerText = act.details || act.state || "";
         }
