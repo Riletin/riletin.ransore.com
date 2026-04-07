@@ -8,22 +8,12 @@ async function fetchPresence() {
     }
 }
 
-async function fetchBio() {
-	try {
-        const response = await fetch(`https://dcdn.dstn.to/profile/277565639793704961`);
-        const data = await response.json();
-		
-		const bioElement = document.getElementById('about-me').innerText = data.user.bio;
-	} catch (err) {
-		console.error("Error Bio API:", err);
-	}
-}
-
 function updateUI(data) {
     const statusEmojis = { online: "🟢", idle: "🌙", dnd: "🔴", offline: "⚫" };
 
     document.getElementById('discord-name').innerText = data.data.discord_user.global_name;
     document.getElementById('status').innerHTML = `${statusEmojis[data.data.status] || "⚫"}`;
+	document.getElementById('about-me').innerText = data.data.discord_user.bio;
 
 	const list = document.getElementById('activities-list');
     list.innerHTML = "";
@@ -86,7 +76,6 @@ function updateUI(data) {
 
 
 window.addEventListener('DOMContentLoaded', () => {
-	fetchBio();
     fetchPresence();
     setInterval(fetchPresence, 1000);
 });
