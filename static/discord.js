@@ -1,6 +1,6 @@
 async function fetchPresence() {
     try {
-        const response = await fetch(`https://presence.ransore.com/277565639793704961`);
+        const response = await fetch(`https://api.ransore.com/discord/277565639793704961`);
         const data = await response.json();
         if (data) updateUI(data);
     } catch (err) {
@@ -14,7 +14,7 @@ function updateUI(data) {
         online: "#43b581",
         idle: "#faa61a",
         dnd: "#f04747",
-        offline: "transparent" // This won't be used as we hide offline icons
+        offline: "transparent"
     };
 	
     document.getElementById('discord-name').innerText = data.data.discord_user.global_name;
