@@ -18,6 +18,8 @@ html,body {
 		0px 0px 6px #000;
 	font-family: Comic Sans MS;
 	color: white;
+	scrollbar-width: none; 
+    -ms-overflow-style: none;
 }
 html{
 	background-color: black;
@@ -416,15 +418,17 @@ html{
 <div id="enterOverlay">♡</div>
 <p id="views">Views: <span id="view-count">Loading...</span>
 <script>
-  async function updateCounter() {
+async function updateCounter() {
     try {
-      const response = await fetch('https://riletin.ransore.com/api/views');
-      const data = await response.json();
-      document.getElementById('view-count').innerText = data.count;
+		const response = await fetch('https://riletin.ransore.com/api/views' + window.location.search, {
+			credentials: 'include'
+		});
+		const data = await response.json();
+		document.getElementById('view-count').innerText = data.count;
     } catch (error) {
-      document.getElementById('view-count').innerText = "Unavailable";
+		document.getElementById('view-count').innerText = "Unavailable";
     }
-  }
+}
 
   updateCounter();
 </script></p>
