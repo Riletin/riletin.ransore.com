@@ -397,10 +397,37 @@ html{
     background: red;
     border-radius: 50%;
 }
+
+#views {
+	position: fixed;
+	bottom: 16px;
+	left: 16px;
+	font-size: 16px;
+	font-family: Comic Sans MS;
+	background: rgba(128,85,85,0.25);
+	border-radius: 16px;
+	padding: 6px;
+	backdrop-filter: blur(100px);
+	border: 2px solid red;
+}
 </style>
 </head>
 <body>
 <div id="enterOverlay">♡</div>
+<p id="views">Views: <span id="view-count">Loading...</span>
+<script>
+  async function updateCounter() {
+    try {
+      const response = await fetch('https://riletin.ransore.com/api/views');
+      const data = await response.json();
+      document.getElementById('view-count').innerText = data.count;
+    } catch (error) {
+      document.getElementById('view-count').innerText = "Unavailable";
+    }
+  }
+
+  updateCounter();
+</script></p>
 <script src="static\discord.js"></script>
 <div class="main-wrapper">
 	<div class="banner">
