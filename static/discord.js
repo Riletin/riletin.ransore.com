@@ -10,7 +10,13 @@ async function fetchPresence() {
 
 function updateUI(data) {
     const statusEmojis = { online: "🟢", idle: "🌙", dnd: "🔴", offline: "⚫" };
-
+	const statusColors = {
+        online: "#43b581",
+        idle: "#faa61a",
+        dnd: "#f04747",
+        offline: "transparent" // This won't be used as we hide offline icons
+    };
+	
     document.getElementById('discord-name').innerText = data.data.discord_user.global_name;
     document.getElementById('status').innerHTML = `${statusEmojis[data.data.status] || "⚫"}`;
 	document.getElementById('about-me').innerText = data.data.discord_user.bio;
@@ -21,32 +27,28 @@ function updateUI(data) {
 	const platformContainer = document.getElementById('platform-icon');
     platformContainer.innerHTML = "";
 
-    if (data.data.platform.desktop) {
-        const desktopSvg = document.createElement('span');
-        desktopSvg.innerHTML = `
-            <svg fill="#FF0000" viewBox="0 0 24 24" style="width:20px; height:20px;">
-                <path d="M4 2.5c-1.103 0-2 .897-2 2v11c0 1.104.897 2 2 2h7v2H7v2h10v-2h-4v-2h7c1.103 0 2-.896 2-2v-11c0-1.103-.897-2-2-2H4Zm16 2v9H4v-9h16Z"></path>
-            </svg>`;
-        platformContainer.appendChild(desktopSvg);
-    }
-	
-	if (data.data.platform.mobile) {
-    const mobileSvg = document.createElement('span');
-    mobileSvg.innerHTML = `
-        <svg fill="#FF0000" viewBox="0 0 24 24" style="width:20px; height:20px;">
-            <path d="M17 2H7c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2ZM7 4h10v12H7V4Zm5 16c-.552 0-1-.448-1-1s.448-1 1-1 1 .448 1 1-.448 1-1 1Z"></path>
-        </svg>`;
-    platformContainer.appendChild(mobileSvg);
-	}
+	const addIcon = (platformName, svgPath) => {
+        const status = data.data.platform[platformName];
+		if (status && status !== "offline") {
+            const iconColor = statusColors[status] || "#b9bbbe";
+            const span = document.createElement('span');
+            span.innerHTML = `
+                <svg fill="${iconColor}" viewBox="0 0 24 24" style="width:18px; height:18px; vertical-align: middle;">
+                    <path d="${svgPath}"></path>
+                </svg>`;
+            platformContainer.appendChild(span);
+        }
+    };
 
-	if (data.data.platform.web) {
-		const webSvg = document.createElement('span');
-		webSvg.innerHTML = `
-			<svg fill="#FF0000" viewBox="0 0 24 24" style="width:20px; height:20px;">
-				<path d="M 187 0 L 813 0 C 916.277 0 1000 83.723 1000 187 L 1000 1313 C 1000 1416.277 916.277 1500 813 1500 L 187 1500 C 83.723 1500 0 1416.277 0 1313 L 0 187 C 0 83.723 83.723 0 187 0 Z M 125 1000 L 875 1000 L 875 250 L 125 250 Z M 500 1125 C 430.964 1125 375 1180.964 375 1250 C 375 1319.036 430.964 1375 500 1375 C 569.036 1375 625 1319.036 625 1250 C 625 1180.964 569.036 1125 500 1125 Z"></path>
-			</svg>`;
-		platformContainer.appendChild(webSvg);
-	}
+	const paths = {
+		desktop: "M4 2.5c-1.103 0-2 .897-2 2v11c0 1.104.897 2 2 2h7v2H7v2h10v-2h-4v-2h7c1.103 0 2-.896 2-2v-11c0-1.103-.897-2-2-2H4Zm16 2v9H4v-9h16Z",
+		mobile: "M17 2H7c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2ZM7 4h10v12H7V4Zm5 16c-.552 0-1-.448-1-1s.448-1 1-1 1 .448 1 1-.448 1-1 1Z",
+		web: "M 187 0 L 813 0 C 916.277 0 1000 83.723 1000 187 L 1000 1313 C 1000 1416.277 916.277 1500 813 1500 L 187 1500 C 83.723 1500 0 1416.277 0 1313 L 0 187 C 0 83.723 83.723 0 187 0 Z M 125 1000 L 875 1000 L 875 250 L 125 250 Z M 500 1125 C 430.964 1125 375 1180.964 375 1250 C 375 1319.036 430.964 1375 500 1375 C 569.036 1375 625 1319.036 625 1250 C 625 1180.964 569.036 1125 500 1125 Z",
+	};
+
+	addIcon('desktop', paths.desktop);
+	addIcon('mobile', paths.mobile);
+	addIcon('web', paths.web);
 
     data.data.activities.forEach(act => {
         const div = document.createElement('div');
