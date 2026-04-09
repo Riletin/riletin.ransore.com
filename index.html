@@ -49,13 +49,17 @@ html{
 	height: 100vh;
 }
 
+#current-tab-name {
+	white-space: nowrap;
+}
+
 #tabs-container {
     border: none;
 	border: 2px solid red;
 	border-radius: 12px;
 	background: rgba(85,0,0,0.5);
-	backdrop-filter: blur(10px);
-	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(16px);
+	-webkit-backdrop-filter: blur(16px);
 }
 
 .slider-wrapper {
@@ -135,7 +139,9 @@ html{
     height: 100%;
     border-radius: 50%;
     display: block;
-}
+	filter: drop-shadow(0 0 6px rgba(0, 0, 0, 1)) 
+			drop-shadow(0 0 6px rgba(0, 0, 0, 1));
+	}
 
 #status {
     position: absolute;
@@ -313,7 +319,89 @@ html{
 .banner {
 	display: flex;
 	padding-bottom: 16px;
+	filter: drop-shadow(0px 0px 6px rgba(255, 0, 0, 1));
 }
+
+/* music-history */
+
+.track-item {
+	display: flex;
+	margin: 10px;
+	border-radius: 18px;
+	border: 2px dotted red;
+	text-decoration: none;
+	overflow: hidden;
+	padding: 4px;
+}
+
+
+.track-info {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding-right: 6px;
+	padding-left: 32px;
+	height: 100%;
+	width: 100%;
+	text-align: right;
+	text-decoration: none;
+	font-size: 20px;
+}
+
+.track-link {
+	display: flex;
+	color: White;
+	width: 100%;
+	text-decoration: none;
+}
+
+#song-cover {
+	border-radius: 20%;
+	filter: drop-shadow(0 0 6px rgba(0, 0, 0, 1)) 
+			drop-shadow(0 0 6px rgba(0, 0, 0, 1));
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+.pulse-dot {
+	position: absolute;
+	top: 6px;
+	right: 6px;
+	width: 8px;
+	height: 8px;
+	background-color: #f00;
+	border-radius: 50%;  
+	animation: pulse-animation 1.5s infinite ease-in-out;
+	z-index: 1;
+}
+
+#song-cover {
+	border-radius: 20%;
+	display: block;
+	object-fit: cover;
+}
+
+@keyframes pulse-animation {
+	0% {
+		transform: scale(0.95);
+		box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
+	}
+	70% {
+		transform: scale(1.1); /* Slightly larger pulse */
+		box-shadow: 0 0 0 4px rgba(255, 0, 0, 0);
+	}
+	100% {
+		transform: scale(0.95);
+		box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+	}
+}
+
+/* music-history */
 
 /* YOUTUBE MUSIC PLAYER CUSTOM EMBED */
 
@@ -434,6 +522,7 @@ async function updateCounter() {
 updateCounter();
 </script>
 </p>
+
 <script src="static\discord.js"></script>
 <div class="main-wrapper">
 	<div class="banner">
@@ -563,8 +652,11 @@ updateCounter();
 					</a>
                 </div>
             </div>
+			
+			<div id="song-history" class="tab-content" style="display:none;">
+				<script src="static/music.js"></script>
+            </div>
         </div>
-
 		<div class="ytm-player">
 			<img class="ytm-player__thumb" src="static/cover.jpg"/>
 			<div class="ytm-player__info">
@@ -589,7 +681,7 @@ updateCounter();
 	<script src="static/enter.js"></script>
 </div>
 <script>
-const tabs = ['home', 'socials', 'links', 'profiles'];
+const tabs = ['home', 'socials', 'links', 'profiles', 'song-history'];
 let currentTabIndex = 0;
 
 function changeTab(direction) {
@@ -614,15 +706,14 @@ function showTab(tabId) {
     const activeTab = document.getElementById(tabId);
     if (!activeTab) return;
 
-    if (tabId === 'home' || tabId === 'links' || tabId === 'socials') {
+if (tabId === 'home' || tabId === 'links' || tabId === 'socials') {
         activeTab.style.display = 'flex';
-    } else if (tabId === 'profiles') {
-        activeTab.style.display = 'grid';
+    } else if (tabId === 'profiles' || tabId === 'song-history') {
+        activeTab.style.display = 'block'; // Or 'grid' if you prefer
     } else {
         activeTab.style.display = 'block';
     }
 }
 </script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"b90508f7de7c4de18d50df3d79a30a94","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
