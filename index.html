@@ -165,12 +165,20 @@ html{
 }
 
 #discord-tag {
+	display: flex;
     font-size: 12px;
-    border-radius: 20%;
-    background: rgba(85, 85, 85, 0.5);
-    padding: 2px 5px;
+    border-radius: 6px;
+    background: rgba(51, 51, 51, 0.5);
     text-shadow: none;
 	white-space: nowrap;
+	align-items: center;
+	padding: 2px 5px;
+}
+
+#clan-tag {
+	width: 14px;
+	height: 14x;
+	padding-right: 2px;
 }
 
 #about-me {
@@ -549,7 +557,7 @@ updateCounter();
 						<div class="identity-info">
 							<div class="name-line">
 								<strong id="discord-name"></strong>
-								<span id="discord-tag">!₹$</span>
+								<span id="discord-tag"><img id="clan-tag" src="static/clan.png">!₹$</span>
 							</div>
 							<div id="platform-icon"></div>
 						</div>
