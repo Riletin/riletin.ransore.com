@@ -20,6 +20,7 @@ function updateUI(data) {
     document.getElementById('discord-name').innerText = data.data.discord_user.global_name;
     document.getElementById('status').innerHTML = `${statusEmojis[data.data.status] || "⚫"}`;
 	document.getElementById('about-me').innerText = data.data.discord_user.bio;
+	
 
 	const list = document.getElementById('activities-list');
     list.innerHTML = "";
@@ -50,29 +51,50 @@ function updateUI(data) {
 	addIcon('mobile', paths.mobile);
 	addIcon('web', paths.web);
 
-    data.data.activities.forEach(act => {
-        const div = document.createElement('div');
-        div.className = "activity";
+	data.data.activities.forEach(act => {
+		const div = document.createElement('div');
+		div.className = "activity";
+		
+		if (act.assets && act.assets.large_image) {
+			const assetContainer = document.createElement('div');
+			assetContainer.className = "activity-assets";
 
-        const nameEl = document.createElement('strong');
-        nameEl.innerText = act.name;
-        div.appendChild(nameEl);
-        div.appendChild(document.createElement('br'));
+			const largeImg = document.createElement('img');
+			largeImg.src = act.assets.large_image;
+			largeImg.className = "activity-large-img";
+			assetContainer.appendChild(largeImg);
 
-		const infoLine = document.createElement('div'); // Changed to div for better block control
+			if (act.assets.small_image) {
+				const smallImg = document.createElement('img');
+				smallImg.src = act.assets.small_image;
+				smallImg.className = "activity-small-img";
+				assetContainer.appendChild(smallImg);
+			}
+			div.appendChild(assetContainer);
+		}
+
+		const textContainer = document.createElement('div');
+		textContainer.className = "activity-content";
+
+		const nameEl = document.createElement('strong');
+		nameEl.innerText = act.name;
+		textContainer.appendChild(nameEl);
+
+		const infoLine = document.createElement('div');
 		infoLine.className = "activity-details";
-        // Only add the dot if BOTH details and state exist
-        if (act.details && act.state) {
-            infoLine.innerText = `${act.details}\n${act.state}`;
-        } else {
-            infoLine.innerText = act.details || act.state || "";
-        }
+		if (act.details && act.state) {
+			infoLine.innerText = `${act.details}\n${act.state}`;
+		} else {
+			infoLine.innerText = act.details || act.state || "";
+		}
 
-        if (infoLine.innerText) {
-            div.appendChild(infoLine);
-        }
-        list.appendChild(div);
-    });
+		if (infoLine.innerText) {
+			textContainer.appendChild(infoLine);
+		}
+
+		div.appendChild(textContainer);
+		list.appendChild(div);
+	});
 }
 
 
