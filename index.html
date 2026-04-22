@@ -132,15 +132,15 @@ html{
 
 .avatar-wrapper {
     position: relative;
-    width: 48px;
-    height: 48px;
+    width: 64px;
+    height: 64px;
     flex-shrink: 0;
 }
 
 #discord-avatar {
     width: 100%;
     height: 100%;
-    border-radius: 50%;
+    border-radius: 32px;
     display: block;
 	filter: drop-shadow(0 0 3px rgba(0, 0, 0, 1)) 
 			drop-shadow(0 0 3px rgba(0, 0, 0, 1));
@@ -167,11 +167,16 @@ html{
 	white-space: nowrap;
 }
 
+#discord-name{
+	font-size: 24px;
+	text-shadow: 0 0 4px red;
+}
+
 #discord-tag {
 	display: flex;
     font-size: 12px;
     border-radius: 6px;
-    background: rgba(51, 51, 51, 0.5);
+    background: rgba(51, 51, 51, 0.75);
     text-shadow: none;
 	white-space: nowrap;
 	align-items: center;
@@ -186,7 +191,7 @@ html{
 
 #about-me {
 	display: flex;
-    font-size: 14px;
+    font-size: 20px;
     line-height: 1.5;
 	padding: 2px;
 	height: 100%;
@@ -195,7 +200,7 @@ html{
 }
 
 #activities-list {
-    font-size: 16px;
+    font-size: 20px;
 	text-align: left;
 	width: 100%;
 	border-top: 2px solid red;
@@ -212,7 +217,7 @@ html{
 }
 
 .activity-details {
-	font-size: 12px;
+	font-size: 16px;
 	color: #888;
 	white-space: nowrap;
 	flex-direction: column;
@@ -228,34 +233,28 @@ html{
 }
 
 .activity-content strong {
-    font-size: 14px;
     color: white;
 }
 
 .activity-assets {
     position: relative;
-    width: 48px;
+    width: 100px;
     flex-shrink: 0;
 }
 
 .activity-large-img {
     width: 100%;
     height: 100%;
-    border-radius: 8px;
+    border-radius: 12px;
     display: block;
-	filter:
-		drop-shadow(0 0 3px rgba(0, 0, 0, 1))
-		drop-shadow(0 0 3px rgba(0, 0, 0, 1));
 }
 
 .activity-small-img {
     position: absolute;
     bottom: 0;
     right: 0;
-    width: 18px;
-    border-radius: 9px;
-	filter:
-		drop-shadow(0 0 3px rgba(0, 0, 0, 1));
+    width: 32px;
+    border-radius: 16px;
 }
 
 /*          HOME          */
@@ -730,12 +729,10 @@ updateCounter();
     </div>
 </div>
 <video id="bg" src="static\bg.mp4" autoplay="" loop="" disablepictureinpicture="" disableremoteplayback="" muted=""><video/>
-<div>
-	<audio id="bgAudio" loop>
-		<source src="https://localhost.ransore.com/Riletin/static/audio.mp3" type="audio/mpeg">
-	</audio>
-	<script src="static/enter.js"></script>
-</div>
+<audio id="bgAudio" loop>
+	<source src="static/audio.mp3" type="audio/mpeg">
+</audio>
+<script src="static/enter.js"></script>
 <script>
 const tabs = ['home', 'socials', 'links', 'profiles', 'song-history'];
 let currentTabIndex = 0;
@@ -765,7 +762,7 @@ function showTab(tabId) {
 if (tabId === 'home' || tabId === 'links' || tabId === 'socials') {
         activeTab.style.display = 'flex';
     } else if (tabId === 'profiles' || tabId === 'song-history') {
-        activeTab.style.display = 'block'; // Or 'grid' if you prefer
+        activeTab.style.display = 'block';
     } else {
         activeTab.style.display = 'block';
     }

@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Playback failed:", err);
         });
 
-        overlay.style.transition = "opacity 0.4s";
+        overlay.style.transition = "opacity 0.5s";
         overlay.style.opacity = "0";
 
         setTimeout(() => {
