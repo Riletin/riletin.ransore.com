@@ -578,7 +578,12 @@ updateCounter();
 </script>
 </p>
 
-<script src="static\discord.js"></script>
+<script>
+    // Dynamically create a script tag with a unique timestamp on every load
+    const script = document.createElement('script');
+    script.src = `static/discord.js?v=${new Date().getTime()}`;
+    document.head.appendChild(script);
+</script>
 <div class="main-wrapper">
 	<div class="banner">
 		<img src="static/banner.png" style="z-index: 1;"></img>
