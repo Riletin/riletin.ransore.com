@@ -578,12 +578,7 @@ updateCounter();
 </script>
 </p>
 
-<script>
-    // Dynamically create a script tag with a unique timestamp on every load
-    const script = document.createElement('script');
-    script.src = `static/discord.js?v=${new Date().getTime()}`;
-    document.head.appendChild(script);
-</script>
+<script src="static/discord.js"></script>
 <div class="main-wrapper">
 	<div class="banner">
 		<img src="static/banner.png" style="z-index: 1;"></img>
@@ -737,7 +732,7 @@ updateCounter();
 <audio id="bgAudio" loop>
 	<source src="static/audio.mp3" type="audio/mpeg">
 </audio>
-<script src="static/enter.js"></script>
+<script src="static/enter.js"></script>>
 <script>
 const tabs = ['home', 'socials', 'links', 'profiles', 'song-history'];
 let currentTabIndex = 0;
