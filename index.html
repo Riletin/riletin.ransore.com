@@ -191,7 +191,7 @@ html{
 
 #about-me {
 	display: flex;
-    font-size: 20px;
+    font-size: 18px;
     line-height: 1.5;
 	padding: 2px;
 	height: 100%;
@@ -217,9 +217,8 @@ html{
 }
 
 .activity-details {
-	font-size: 16px;
+	font-size: 14px;
 	color: #888;
-	white-space: nowrap;
 	flex-direction: column;
 }
 
@@ -578,7 +577,11 @@ updateCounter();
 </script>
 </p>
 
-<script src="static/discord.js"></script>
+<script>
+    const script = document.createElement('script');
+    script.src = `static/discord.js`;
+    document.head.appendChild(script);
+</script>
 <div class="main-wrapper">
 	<div class="banner">
 		<img src="static/banner.png" style="z-index: 1;"></img>
@@ -732,7 +735,7 @@ updateCounter();
 <audio id="bgAudio" loop>
 	<source src="static/audio.mp3" type="audio/mpeg">
 </audio>
-<script src="static/enter.js"></script>>
+<script src="static/enter.js"></script>
 <script>
 const tabs = ['home', 'socials', 'links', 'profiles', 'song-history'];
 let currentTabIndex = 0;

@@ -33,9 +33,9 @@ document.addEventListener("DOMContentLoaded", () => {
         audio.play().then(() => {
             audio.volume = 0;
 
-            let vol = 0;
-            const maxVol = 0.03;
-            const fadeStep = 0.001;
+            let vol = 0.001;
+            const maxVol = 0.05;
+            const fadeStep = 0.005;
             
             const fade = setInterval(() => {
                 vol += fadeStep;
